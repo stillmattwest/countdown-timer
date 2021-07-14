@@ -1,0 +1,10 @@
+.timer-container{
+    position:relative;
+    top:-50px;
+    display: inline-block;
+}
+.timer-display{
+    font-size: 4em;
+}
+
+
