@@ -1,4 +1,5 @@
 import React,{Component} from "react";
+import {Container,Form,Row,Col,Button} from "react-bootstrap";
 import "./TimerSettings.css";
 
 class TimerSettings extends Component {
@@ -16,29 +17,26 @@ class TimerSettings extends Component {
     }
 
     handleCountdownChange = (e) => {
-        this.setState({countdownValue:e.target.value?e.target.value:''});
+        this.setState({countdownValue:e.target.value?e.value:''});
         
-    }
-
-    handleTimerStartClick = (e) => {
-        console.log('start button click detected');
     }
 
     render(){
         return(
-            <div>
-                <span>
-                <form onSubmit={this.handleCountdownSubmit}>
-                    <label>
-                        Countdown:
-                        <input type="text" value={this.state.countdownValue} onChange={this.handleCountdownChange} />
-                    </label>
-                    <button >Start</button>
-                </form>
-                </span>
-              
-    
-            </div>
+            <Container fluid className="timer-settings-container">
+                <Form onSubmit={this.handleCountdownSubmit}>
+                    <Row>
+                        <Form.Group as={Row} className="mb-3" controlId="formHorizontal">
+                            <Form.Label column="lg" sm={{span:3,offset:4}} className="timer-settings-countdown-label">Countdown:</Form.Label>
+                            <Col sm={2}>
+                                <Form.Control size="lg" type="text" placeholder="enter minutes" className="timer-settings-minute-input"></Form.Control>
+                            </Col>
+                        </Form.Group>
+                    </Row>
+                </Form>
+            </Container>
+            
+           
         )
     }
    

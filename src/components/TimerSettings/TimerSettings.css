@@ -1,0 +1,14 @@
+.timer-settings-container{
+    text-align:center;
+}
+
+.timer-settings-countdown-label{
+    position: relative;
+    right:37px;
+
+}
+
+.timer-settings-minute-input{
+    position: relative;
+    right:147px;
+}
