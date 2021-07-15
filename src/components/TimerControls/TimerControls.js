@@ -4,6 +4,7 @@ import {BiPause,BiPlay,BiReset} from 'react-icons/bi';
 import {connect} from 'react-redux';
 import {setTimerMins,setTimerSecs} from '../../actions/timerSettingsActions';
 import {setPause,setTimerRunning} from '../../actions/playPauseActions';
+import { setTimerSpeed } from '../../actions/timerPlaybackActions';
 import "./TimerControls.css";
 
 class TimerControls extends Component{
@@ -12,23 +13,26 @@ class TimerControls extends Component{
         this.props.setPause(true);
     }
 
-    getTimerMins = () => {
-        return this.props.timerMins;
-    }
-
-    getTimerSecs = () => {
-        return this.props.timerSecs;
-    }
-
     runTimer = () => {
         try{
             this.props.setTimerRunning(true);
+            let timerSpeed = this.props.timerSpeed ? this.props.timerSpeed : 1000;
             const context = this;
+            var runningTimer = setInterval(timer,timerSpeed);
             function timer(){
                 console.log('timer running');
                 let mins = context.props.timerMins;
                 let secs = context.props.timerSecs;
                 let paused = context.props.paused;
+                // check to see if speed has changed
+                let newSpeed = context.props.timerSpeed;
+                let speedChanged = newSpeed !== timerSpeed;
+                if(speedChanged){
+                    // if speed has changed, reset timer with new speed
+                    timerSpeed = newSpeed;
+                    clearInterval(runningTimer);
+                    runningTimer = setInterval(timer,timerSpeed);
+                }
                 if(paused){
                     clearInterval(runningTimer);
                 }
@@ -47,7 +51,7 @@ class TimerControls extends Component{
                 }
             }
             
-            let runningTimer = setInterval(timer,1000);
+            
 
             }catch(err){
             console.log(`components.TimerControls.runTimer: ${err}`);
@@ -79,6 +83,7 @@ class TimerControls extends Component{
             this.props.setTimerSecs(0);
             this.props.setPause(true);
             this.props.setTimerRunning(false);
+            this.props.setTimerSpeed(1000);
         }catch(err){
             console.log(`components.TimerControls.handleResetClick: ${err}`);
         }
@@ -109,7 +114,7 @@ class TimerControls extends Component{
 }
 
 const mapStateToProps = (state) => {
-    return{timer:state.timer,paused:state.paused,timerMins:state.timerMins,timerSecs:state.timerSecs}
+    return{timer:state.timer,paused:state.paused,timerMins:state.timerMins,timerSecs:state.timerSecs,timerSpeed:state.timerSpeed}
 }
 
-export default connect(mapStateToProps,{setTimerMins,setTimerSecs,setPause,setTimerRunning})(TimerControls);
+export default connect(mapStateToProps,{setTimerMins,setTimerSecs,setPause,setTimerRunning,setTimerSpeed})(TimerControls);
