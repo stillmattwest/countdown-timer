@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {Button} from 'react-bootstrap';
 import {BiPause,BiPlay,BiReset} from 'react-icons/bi';
 import {connect} from 'react-redux';
-import {setTimer} from '../../actions/timerSettingsActions';
+import {setTimerMins,setTimerSecs} from '../../actions/timerSettingsActions';
 import {setPause} from '../../actions/playPauseActions';
 import "./TimerControls.css";
 
@@ -28,7 +28,8 @@ class TimerControls extends Component{
 
     handleResetClick = () => {
         try{
-            this.props.setTimer('');
+            this.props.setTimerMins(0);
+            this.props.setTimerSecs(0);
             this.props.setPause(true);
         }catch(err){
             console.log(`components.TimerControls.handleResetClick: ${err}`);
@@ -59,4 +60,4 @@ const mapStateToProps = (state) => {
     return{timer:state.timer,paused:state.paused}
 }
 
-export default connect(mapStateToProps,{setTimer,setPause})(TimerControls);
+export default connect(mapStateToProps,{setTimerMins,setTimerSecs,setPause})(TimerControls);

@@ -1,11 +1,12 @@
 import React,{Component} from "react";
 import {Container,Form,Row,Col} from "react-bootstrap";
 import {connect} from 'react-redux';
-import {setTimer} from '../../actions/timerSettingsActions';
+import {setTimerMins,setTimerSecs} from '../../actions/timerSettingsActions';
 import {setMessage} from '../../actions/messageActions';
 import "./TimerSettings.css";
 
 class TimerSettings extends Component {
+    
 
     handleCountdownChange = (e) => {
         try{
@@ -13,10 +14,12 @@ class TimerSettings extends Component {
             if(!isNaN(mins) || e.target.value === ''){
                 if(e.target.value === ''){
                     this.props.setMessage('');
-                    this.props.setTimer('');
+                    this.props.setTimerMins(0);
+                    this.props.setTimerSecs(0);
                 }else if(mins <= 99){
                     this.props.setMessage('');
-                    this.props.setTimer(mins);
+                    this.props.setTimerMins(mins);
+                    this.props.setTimerSecs(0);
                 }else{
                     this.props.setMessage('Number of minutes must be less than 100');
                 }
@@ -33,8 +36,8 @@ class TimerSettings extends Component {
 
     renderTimerInput = () => {
         try{
-            if(this.props.timer){
-                return this.props.timer;
+            if(this.props.timerMins){
+                return this.props.timerMins
             }else{
                 return '';
             }
@@ -65,7 +68,7 @@ class TimerSettings extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return{timer:state.timer}
+    return{timerMins:state.timerMins,timerSecs:state.timerSecs}
 }
 
-export default connect(mapStateToProps,{setTimer,setMessage})(TimerSettings);
+export default connect(mapStateToProps,{setTimerMins,setTimerSecs,setMessage})(TimerSettings);

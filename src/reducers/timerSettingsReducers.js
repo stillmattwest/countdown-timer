@@ -1,5 +1,13 @@
-export const setTimerReducer = (state =[],action) => {
-    if(action.type === 'SET_TIMER'){
+export const setTimerMinsReducer = (state =[],action) => {
+    if(action.type === 'SET_TIMER_MINS'){
+        return action.payload;
+    }
+
+    return state;
+}
+
+export const setTimerSecsReducer = (state = [],action) => {
+    if(action.type === 'SET_TIMER_SECS'){
         return action.payload;
     }
 

@@ -1,21 +1,32 @@
 import React,{Component} from 'react';
-import { Container,Row,Col } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import {connect} from 'react-redux';
+import { setTimerMins,setTimerSecs } from '../../actions/timerSettingsActions';
 import './Timer.css';
 
 class Timer extends Component{
+    componentDidMount(){
+        this.props.setTimerMins(0);
+        this.props.setTimerSecs(0);
+    }
 
     renderTimerDisplay = () => {
-        if(this.props.timer){
-            let mins = this.props.timer;
-            let displayMins = mins >= 10 ? `${mins}`:`0${mins}`;
-            // TODO get this working
-            let displaySecs = '00';
+        try{
+            if((this.props.timerMins || this.props.timerMins === 0) && (this.props.timerSecs || this.props.timerSecs === 0)){
+                let mins = this.props.timerMins;
+                let secs = this.props.timerSecs;
+                let displayMins = mins >= 10 ? `${mins}`:`0${mins}
+                `;
+                let displaySecs = secs >=10 ? `${secs}`:`0${secs}`;
 
-            return `${displayMins}:${displaySecs}`;
-        }else{
-            return '00:00';
+                return `${displayMins}:${displaySecs}`;
+            }else{
+                throw new Error('timer missing props');
+            }
+        }catch(err){
+            console.log(`components.Timer.renderTimerDisplay: ${err}`);
         }
+        
     }
 
     render(){
@@ -28,7 +39,7 @@ class Timer extends Component{
 }
 
 const mapStateToProps = (state) => {
-    return{timer:state.timer}
+    return{timerMins:state.timerMins,timerSecs:state.timerSecs}
 }
 
-export default connect(mapStateToProps)(Timer);
+export default connect(mapStateToProps,{setTimerMins,setTimerSecs})(Timer);
