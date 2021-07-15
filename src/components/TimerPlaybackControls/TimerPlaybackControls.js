@@ -1,8 +1,7 @@
-import render from 'dom-serializer';
 import React,{Component} from 'react';
-import { Container,Row,Col,Button,ButtonGroup } from 'react-bootstrap';
+import { Container,Col,Button} from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {setTimerSpeed} from '../../actions/timerPlaybackActions';
+import {setTimerSpeed,setDarkMode} from '../../actions/timerPlaybackActions';
 import "./TimerPlaybackControls.css";
 
 class TimerPlaybackControls extends Component{
@@ -18,6 +17,14 @@ class TimerPlaybackControls extends Component{
         }
     }
 
+    setDarkMode = () => {
+        if(this.props.darkMode){
+            this.props.setDarkMode(false);
+        }else{
+            this.props.setDarkMode(true);
+        }
+    }
+
     render(){
         return(
             <Container>
@@ -25,7 +32,7 @@ class TimerPlaybackControls extends Component{
                     <Button variant="dark" size="lg" className="timer-playback-control-button" onClick={() => this.setTimerSpeed(1000)}>1x</Button>
                     <Button variant="dark" size="lg" className="timer-playback-control-button" onClick={() => this.setTimerSpeed(750)}>1.5x</Button>
                     <Button variant="dark" size="lg" className="timer-playback-control-button" onClick={() => this.setTimerSpeed(500)}>2x</Button>
-                    <Button variant="dark" size="lg" className="timer-playback-control-button dark-mode-button">Dark Mode</Button>
+                    <Button variant="dark" size="lg" className="timer-playback-control-button dark-mode-button" onClick={this.setDarkMode}>Dark Mode</Button>
                 </Col>
                 
             </Container>
@@ -34,7 +41,7 @@ class TimerPlaybackControls extends Component{
 }
 
 const mapStateToProps = (state) => {
-    return{timerSpeed:state.timerSpeed}
+    return{timerSpeed:state.timerSpeed, darkMode:state.darkMode}
 }
 
-export default connect(mapStateToProps,{setTimerSpeed})(TimerPlaybackControls);
+export default connect(mapStateToProps,{setTimerSpeed,setDarkMode})(TimerPlaybackControls);
