@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { setTimerMinsReducer,setTimerSecsReducer } from "./timerSettingsReducers";
 import { setMessageReducer } from "./messageReducers";
-import {setPauseReducer} from "./playPauseReducers";
+import {setPauseReducer,setTimerRunningReducer} from "./playPauseReducers";
 
-export default combineReducers({timerMins:setTimerMinsReducer,timerSecs:setTimerSecsReducer,message:setMessageReducer,paused:setPauseReducer
+export default combineReducers({timerMins:setTimerMinsReducer,timerSecs:setTimerSecsReducer,message:setMessageReducer,paused:setPauseReducer,timerRunning:setTimerRunningReducer
 });

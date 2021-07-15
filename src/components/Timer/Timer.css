@@ -1,5 +1,7 @@
 .timer-display{
     font-size: 8em;
+    min-width:575px;
+    max-width:575px;
 }
 
 

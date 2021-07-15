@@ -4,11 +4,13 @@
 
 .timer-settings-countdown-label{
     position: relative;
-    right:32px;
+    right:38px;
 
 }
 
 .timer-settings-minute-input{
     position: relative;
-    right:138px;
+    right:144px;
+    min-width:180px !important;
+    max-width:180px !important;
 }

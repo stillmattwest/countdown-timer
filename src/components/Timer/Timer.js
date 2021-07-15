@@ -15,8 +15,7 @@ class Timer extends Component{
             if((this.props.timerMins || this.props.timerMins === 0) && (this.props.timerSecs || this.props.timerSecs === 0)){
                 let mins = this.props.timerMins;
                 let secs = this.props.timerSecs;
-                let displayMins = mins >= 10 ? `${mins}`:`0${mins}
-                `;
+                let displayMins = mins >= 10 ? `${mins}`:`0${mins}`;
                 let displaySecs = secs >=10 ? `${secs}`:`0${secs}`;
 
                 return `${displayMins}:${displaySecs}`;

@@ -4,3 +4,10 @@ export const setPause = (pauseState) => {
       payload: pauseState,
     };
   };
+
+export const setTimerRunning = (timerState) => {
+  return {
+    type: "SET_TIMER_RUNNING",
+    payload: timerState
+  };
+};

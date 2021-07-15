@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap';
 import {BiPause,BiPlay,BiReset} from 'react-icons/bi';
 import {connect} from 'react-redux';
 import {setTimerMins,setTimerSecs} from '../../actions/timerSettingsActions';
-import {setPause} from '../../actions/playPauseActions';
+import {setPause,setTimerRunning} from '../../actions/playPauseActions';
 import "./TimerControls.css";
 
 class TimerControls extends Component{
@@ -12,15 +12,62 @@ class TimerControls extends Component{
         this.props.setPause(true);
     }
 
+    getTimerMins = () => {
+        return this.props.timerMins;
+    }
+
+    getTimerSecs = () => {
+        return this.props.timerSecs;
+    }
+
+    runTimer = () => {
+        try{
+            this.props.setTimerRunning(true);
+            const context = this;
+            function timer(){
+                console.log('timer running');
+                let mins = context.props.timerMins;
+                let secs = context.props.timerSecs;
+                let paused = context.props.paused;
+                if(paused){
+                    clearInterval(runningTimer);
+                }
+                if(secs > 0){
+                    secs --;
+                    context.props.setTimerSecs(secs);
+                }else{
+                    if(mins > 0){
+                        secs = 59;
+                        mins --;
+                        context.props.setTimerMins(mins);
+                        context.props.setTimerSecs(secs);
+                    }else{
+                        clearInterval(runningTimer);
+                    }
+                }
+            }
+            
+            let runningTimer = setInterval(timer,1000);
+
+            }catch(err){
+            console.log(`components.TimerControls.runTimer: ${err}`);
+        }
+    }
+
     handlePlayPauseClick = () => {
         try{
             if(this.props.paused || this.props.paused === false){
                 if(this.props.paused){
-                    this.props.setPause(false)
+                    this.props.setPause(false);
+                    if(!this.props.timerRunning){
+                        this.runTimer();
+                    }
                 }else{
                     this.props.setPause(true);
+                    this.props.setTimerRunning(false);
                 }
             }
+
         }catch(err){
             console.log(`components.TimerControls.handlePlayPauseClick: ${err}`);
         }
@@ -31,6 +78,7 @@ class TimerControls extends Component{
             this.props.setTimerMins(0);
             this.props.setTimerSecs(0);
             this.props.setPause(true);
+            this.props.setTimerRunning(false);
         }catch(err){
             console.log(`components.TimerControls.handleResetClick: ${err}`);
         }
@@ -44,12 +92,16 @@ class TimerControls extends Component{
         }
     }
 
+    renderResetIcon = () => {
+        return <span className="timer-controls-reset-button"><BiReset/></span>
+    }
+
 
     render(){
         return(
             <div className="timer-controls-button-container">
                 <Button variant="light" size="lg" className="timer-controls-button" onClick={this.handlePlayPauseClick}>{this.renderPlayPauseIcon()}</Button>
-                <Button variant="light" size="lg" className="timer-controls-button" onClick={this.handleResetClick}><BiReset/></Button>
+                <Button variant="light" size="lg" className="timer-controls-button" onClick={this.handleResetClick}>{this.renderResetIcon()}</Button>
             </div>
    
         )
@@ -57,7 +109,7 @@ class TimerControls extends Component{
 }
 
 const mapStateToProps = (state) => {
-    return{timer:state.timer,paused:state.paused}
+    return{timer:state.timer,paused:state.paused,timerMins:state.timerMins,timerSecs:state.timerSecs}
 }
 
-export default connect(mapStateToProps,{setTimerMins,setTimerSecs,setPause})(TimerControls);
+export default connect(mapStateToProps,{setTimerMins,setTimerSecs,setPause,setTimerRunning})(TimerControls);
