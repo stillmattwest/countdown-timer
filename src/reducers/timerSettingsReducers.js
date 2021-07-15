@@ -13,3 +13,11 @@ export const setTimerSecsReducer = (state = [],action) => {
 
     return state;
 }
+
+export const setInitialTimeReducer = (state=[],action) => {
+    if(action.type === 'SET_INITIAL_TIME'){
+        return action.payload;
+    }
+
+    return state;
+}

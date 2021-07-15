@@ -13,17 +13,16 @@ import "./App.css";
 
 class App extends Component{
 
-    toggleDarkMode = () => {
+    selectLightOrDark = () => {
         if(this.props.darkMode){
-            // darkMode is active. Toggle to Flatly
             return <Helmet>
                 <title>React Countdown Timer</title>
-                <link rel="stylesheet" href="flatly/bootstrap.min.css"></link>
+                <link rel="stylesheet" href="darkly/bootstrap.min.css"></link>
             </Helmet>
         }else{
             return <Helmet>
                 <title>React Countdown Timer</title>
-                <link rel="stylesheet" href="darkly/bootstrap.min.css"></link>
+                <link rel="stylesheet" href="flatly/bootstrap.min.css"></link>
             </Helmet>
         }
     }    
@@ -31,7 +30,7 @@ class App extends Component{
     render(){
         return(
             <Container className="app-container">
-                {this.toggleDarkMode()}
+                {this.selectLightOrDark()}
                 <Row>
                     <TimerSettings></TimerSettings>
                 </Row>

@@ -11,3 +11,10 @@ export const setTimerSecs = (seconds) => {
     payload:seconds
   }
 }
+
+export const setInitialTime = (minutes) => {
+  return{
+    type:"SET_INITIAL_TIME",
+    payload:minutes
+  }
+}

@@ -7,6 +7,7 @@ import "./TimerPlaybackControls.css";
 class TimerPlaybackControls extends Component{
     componentDidMount(){
         this.setTimerSpeed(1000);
+        this.props.setDarkMode(false);
     }
 
     setTimerSpeed = (speed) => {
@@ -25,6 +26,14 @@ class TimerPlaybackControls extends Component{
         }
     }
 
+    renderDarkModeButtonText = () => {
+        if(this.props.darkMode){
+            return 'Light Mode'
+        }else{
+            return 'Dark Mode'
+        }
+    }
+
     render(){
         return(
             <Container>
@@ -32,7 +41,7 @@ class TimerPlaybackControls extends Component{
                     <Button variant="dark" size="lg" className="timer-playback-control-button" onClick={() => this.setTimerSpeed(1000)}>1x</Button>
                     <Button variant="dark" size="lg" className="timer-playback-control-button" onClick={() => this.setTimerSpeed(750)}>1.5x</Button>
                     <Button variant="dark" size="lg" className="timer-playback-control-button" onClick={() => this.setTimerSpeed(500)}>2x</Button>
-                    <Button variant="dark" size="lg" className="timer-playback-control-button dark-mode-button" onClick={this.setDarkMode}>Dark Mode</Button>
+                    <Button variant="dark" size="lg" className="timer-playback-control-button dark-mode-button" onClick={this.setDarkMode}>{this.renderDarkModeButtonText()}</Button>
                 </Col>
                 
             </Container>
