@@ -1,16 +1,38 @@
-import React from 'react';
-import './Message.css';
+import React,{Component} from 'react';
 import { Container,Row,Col,Alert } from 'react-bootstrap';
+import {connect} from 'react-redux';
+import {setMessage} from '../../actions/messageActions';
+import './Message.css';
 
-const Message = () => {
-    return(
-        <Container>
-            <Col lg={{span:6,offset:3}}>
-                <Alert variant='warning' className="message-alert">Message Component</Alert>
-            </Col>
-        </Container>
+class Message extends Component {
+
+    renderMessageText = () => {
+        try{
+            if(this.props.message){
+                return this.props.message;
+            }
+    
+            return '';
+        }catch(err){
+            console.log(`components.Message.renderMessageText: ${err}`);
+        }
         
-    )
+    }
+    render(){
+        return(
+            <Container>
+                <Col lg={{span:6,offset:3}}>
+                    <Alert variant='warning' className="message-alert">{this.renderMessageText()}</Alert>
+                </Col>
+            </Container>
+            
+        )
+    }
+    
 }
 
-export default Message;
+const mapStateToProps = (state) => {
+    return{message:state.message}
+}
+
+export default connect(mapStateToProps)(Message);

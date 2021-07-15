@@ -1,3 +1,5 @@
 .message-alert{
     text-align:center;
+    min-height:56px;
+    max-height:56px;
 }

@@ -2,6 +2,7 @@ import React,{Component} from "react";
 import {Container,Form,Row,Col} from "react-bootstrap";
 import {connect} from 'react-redux';
 import {setTimer} from '../../actions/timerSettingsActions';
+import {setMessage} from '../../actions/messageActions';
 import "./TimerSettings.css";
 
 class TimerSettings extends Component {
@@ -10,7 +11,16 @@ class TimerSettings extends Component {
         try{
             let mins = parseInt(e.target.value);
             if(!isNaN(mins) || e.target.value === ''){
-                this.props.setTimer(mins);
+                if(e.target.value === ''){
+                    this.props.setMessage('');
+                    this.props.setTimer('');
+                }else if(mins <= 99){
+                    this.props.setMessage('');
+                    this.props.setTimer(mins);
+                }else{
+                    this.props.setMessage('Number of minutes must be less than 99');
+                }
+                
             }else{
                 e.value = '';
             }
@@ -41,7 +51,7 @@ class TimerSettings extends Component {
                         <Form.Group as={Row} className="mb-3" controlId="formHorizontal">
                             <Form.Label column="lg" sm={{span:3,offset:4}} className="timer-settings-countdown-label">Countdown:</Form.Label>
                             <Col sm={2}>
-                                <Form.Control size="lg" type="text" placeholder="enter minutes" className="timer-settings-minute-input" onChange={this.handleCountdownChange} value={this.renderTimerInput()}></Form.Control>
+                                <Form.Control size="lg" type="text" placeholder="# of minutes" className="timer-settings-minute-input" onChange={this.handleCountdownChange} value={this.renderTimerInput()}></Form.Control>
                             </Col>
                         </Form.Group>
                     </Row>
@@ -58,4 +68,4 @@ const mapStateToProps = (state) => {
     return{timer:state.timer}
 }
 
-export default connect(mapStateToProps,{setTimer})(TimerSettings);
+export default connect(mapStateToProps,{setTimer,setMessage})(TimerSettings);
