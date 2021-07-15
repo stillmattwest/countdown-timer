@@ -2,9 +2,10 @@ import React,{Component} from 'react';
 import {Button} from 'react-bootstrap';
 import {BiPause,BiPlay,BiReset} from 'react-icons/bi';
 import {connect} from 'react-redux';
-import {setTimerMins,setTimerSecs} from '../../actions/timerSettingsActions';
+import {setTimerMins,setTimerSecs,setInitialTime} from '../../actions/timerSettingsActions';
 import {setPause,setTimerRunning} from '../../actions/playPauseActions';
 import { setTimerSpeed } from '../../actions/timerPlaybackActions';
+import { setMessage } from '../../actions/messageActions';
 import "./TimerControls.css";
 
 class TimerControls extends Component{
@@ -20,7 +21,7 @@ class TimerControls extends Component{
             const context = this;
             var runningTimer = setInterval(timer,timerSpeed);
             function timer(){
-                console.log('timer running');
+                let initialTime = context.props.initialTime;
                 let mins = context.props.timerMins;
                 let secs = context.props.timerSecs;
                 let paused = context.props.paused;
@@ -38,11 +39,19 @@ class TimerControls extends Component{
                 }
                 if(secs > 0){
                     secs --;
+                    // check halfway done for odd initialTime
+                    if(initialTime % 2 !== 0 && mins < initialTime / 2 && secs < 30){
+                        context.props.setMessage('More than halfway there!');
+                    }
                     context.props.setTimerSecs(secs);
                 }else{
                     if(mins > 0){
                         secs = 59;
                         mins --;
+                        // check halfway done for even initialTime
+                        if(initialTime % 2 === 0 && mins < initialTime / 2){
+                            context.props.setMessage('More than halfway there!');
+                        }
                         context.props.setTimerMins(mins);
                         context.props.setTimerSecs(secs);
                     }else{
@@ -84,6 +93,8 @@ class TimerControls extends Component{
             this.props.setPause(true);
             this.props.setTimerRunning(false);
             this.props.setTimerSpeed(1000);
+            this.props.setMessage('');
+            this.props.setInitialTime('');
         }catch(err){
             console.log(`components.TimerControls.handleResetClick: ${err}`);
         }
@@ -114,7 +125,7 @@ class TimerControls extends Component{
 }
 
 const mapStateToProps = (state) => {
-    return{timer:state.timer,paused:state.paused,timerMins:state.timerMins,timerSecs:state.timerSecs,timerSpeed:state.timerSpeed}
+    return{timer:state.timer,paused:state.paused,timerMins:state.timerMins,timerSecs:state.timerSecs,timerSpeed:state.timerSpeed,initialTime:state.initialTime}
 }
 
-export default connect(mapStateToProps,{setTimerMins,setTimerSecs,setPause,setTimerRunning,setTimerSpeed})(TimerControls);
+export default connect(mapStateToProps,{setTimerMins,setTimerSecs,setPause,setTimerRunning,setTimerSpeed,setMessage,setInitialTime})(TimerControls);
