@@ -6,12 +6,24 @@
     font-size: 30px !important;
     text-align: center;
     margin-bottom:10px;
-    padding-top:1px !important;
-    padding-right:11px !important;
 }
 
 .timer-controls-button-container{
     position:relative;
     top:23px;
     right:174px;
+}
+
+.timer-controls-play-button{
+    position:relative;
+    top:-4px;
+    left:2px;
+    
+}
+
+.timer-controls-pause-button{
+    position:relative;
+    top:-3px;
+    left:0px;
+    
 }

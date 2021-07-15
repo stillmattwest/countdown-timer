@@ -18,11 +18,11 @@ class TimerSettings extends Component {
                     this.props.setMessage('');
                     this.props.setTimer(mins);
                 }else{
-                    this.props.setMessage('Number of minutes must be less than 99');
+                    this.props.setMessage('Number of minutes must be less than 100');
                 }
                 
             }else{
-                e.value = '';
+                this.props.setMessage('Please enter a number');
             }
         }catch(err){
             if(err){
