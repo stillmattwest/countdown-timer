@@ -1,4 +1,4 @@
-# countdown-timer
+# React Countdown Timer
 A simple countdown timer built with React and Redux
 
 To run:
@@ -12,7 +12,7 @@ npm install
 npm start
 ```
 
-## screenshots
+## Screenshots
 ![Screenshot of the base application](/screenshots/react-timer-base.png "The base application")
 
 ![Screenshot of the set timer](/screenshots/react-timer-timer-set.png "Timer set")
