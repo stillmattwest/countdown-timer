@@ -1,17 +1,26 @@
 # countdown-timer
 A simple countdown timer built with React and Redux
 
-*note - screenshots not available on Github*
+To run:
+```bash
+yarn install
+yarn start
+```
+Or (less ideally)
+```bash
+npm install
+npm start
+```
 
 ## screenshots
-![alt text for screen readers](/screenshots/react-timer-base.png "The base application")
+![Screenshot of the base application](/screenshots/react-timer-base.png "The base application")
 
-![alt text for screen readers](/screenshots/react-timer-timer-set.png "Timer set")
+![Screenshot of the set timer](/screenshots/react-timer-timer-set.png "Timer set")
 
-![alt text for screen readers](/screenshots/react-timer-halfway.png "Halfway done")
+![Screenshot of the halfway done message](/screenshots/react-timer-halfway.png "Halfway done")
 
-![alt text for screen readers](/screenshots/react-timer-red.png "Red text")
+![Screenshot of red timer text](/screenshots/react-timer-red.png "Red text")
 
-![alt text for screen readers](/screenshots/react-timer-done.png "Times up")
+![Screenshot of the time's up message](/screenshots/react-timer-done.png "Times up")
 
-![alt text for screen readers](/screenshots/react-timer-dark-mode.png "Bonus dark mode")
+![Screenshot of the bonus dark mode toggle](/screenshots/react-timer-dark-mode.png "Bonus dark mode")
