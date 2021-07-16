@@ -18,7 +18,15 @@ class Timer extends Component{
                 let displayMins = mins >= 10 ? `${mins}`:`0${mins}`;
                 let displaySecs = secs >=10 ? `${secs}`:`0${secs}`;
 
-                return `${displayMins}:${displaySecs}`;
+                if(mins === 0 && secs <= 20 && secs > 0){
+                    if(secs <= 10){
+                        return <span className='timer-blink'>{displayMins}:{displaySecs}</span>;
+                    }
+                    return <span className="timer-red-text">{displayMins}:{displaySecs}</span>;
+                }else{
+                    return <span>{displayMins}:{displaySecs}</span>;
+                }
+                
             }else{
                 throw new Error('timer missing props');
             }
@@ -38,7 +46,7 @@ class Timer extends Component{
 }
 
 const mapStateToProps = (state) => {
-    return{timerMins:state.timerMins,timerSecs:state.timerSecs}
+    return{timerMins:state.timerMins,timerSecs:state.timerSecs,initialTime:state.initialTime,timerSpeed:state.timerSpeed}
 }
 
 export default connect(mapStateToProps,{setTimerMins,setTimerSecs})(Timer);

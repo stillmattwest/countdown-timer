@@ -55,6 +55,7 @@ class TimerControls extends Component{
                         context.props.setTimerMins(mins);
                         context.props.setTimerSecs(secs);
                     }else{
+                        context.props.setMessage("Time's up!");
                         clearInterval(runningTimer);
                     }
                 }
