@@ -1,6 +1,8 @@
 # countdown-timer
 A simple countdown timer built with react and redux
 
+*note - screenshots not available on Github*
+
 ## screenshots
 ![alt text for screen readers](/screenshots/react-timer-base.png "The base application")
 
