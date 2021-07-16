@@ -15,6 +15,7 @@ class TimerControls extends Component{
     }
 
     runTimer = () => {
+        // this controls the countdown functionality
         try{
             this.props.setTimerRunning(true);
             let timerSpeed = this.props.timerSpeed ? this.props.timerSpeed : 1000;
@@ -35,11 +36,12 @@ class TimerControls extends Component{
                     runningTimer = setInterval(timer,timerSpeed);
                 }
                 if(paused){
+                    // pausing the timer clears the setInterval
                     clearInterval(runningTimer);
                 }
                 if(secs > 0){
                     secs --;
-                    // check halfway done for odd initialTime
+                    // check halfway done for odd initialTime minutes (ie 3, 5, etc)
                     if(initialTime % 2 !== 0 && mins < initialTime / 2 && secs < 30){
                         context.props.setMessage('More than halfway there!');
                     }
@@ -48,7 +50,7 @@ class TimerControls extends Component{
                     if(mins > 0){
                         secs = 59;
                         mins --;
-                        // check halfway done for even initialTime
+                        // check halfway done for even initialTime (ie 2,4 etc)
                         if(initialTime % 2 === 0 && mins < initialTime / 2){
                             context.props.setMessage('More than halfway there!');
                         }
@@ -89,6 +91,7 @@ class TimerControls extends Component{
 
     handleResetClick = () => {
         try{
+            // sets the app back to appropriate default values
             this.props.setTimerMins(0);
             this.props.setTimerSecs(0);
             this.props.setPause(true);

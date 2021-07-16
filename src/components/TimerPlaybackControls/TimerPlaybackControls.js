@@ -11,6 +11,7 @@ class TimerPlaybackControls extends Component{
     }
 
     setTimerSpeed = (speed) => {
+        // speed is a smaller number as speed 'increases' because it decreases the interval of the countdown timer
         try{
             this.props.setTimerSpeed(speed);
         }catch(err){

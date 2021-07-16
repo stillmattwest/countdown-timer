@@ -9,6 +9,8 @@ class TimerSettings extends Component {
     
 
     handleCountdownChange = (e) => {
+        // initialTime is what the user sets. This value is important for some timer functions
+        // countdown limited to 99 minutes due to app requirements of MM:SS format
         try{
             let mins = parseInt(e.target.value);
             if(!isNaN(mins) || e.target.value === ''){
