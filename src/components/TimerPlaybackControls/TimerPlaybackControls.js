@@ -19,19 +19,29 @@ class TimerPlaybackControls extends Component{
     }
 
     setDarkMode = () => {
-        if(this.props.darkMode){
-            this.props.setDarkMode(false);
-        }else{
-            this.props.setDarkMode(true);
+        try{
+            if(this.props.darkMode){
+                this.props.setDarkMode(false);
+            }else{
+                this.props.setDarkMode(true);
+            }
+        }catch(err){
+            console.log(`components.TimerPlaybackControls.setDarkMode: ${err}`);
         }
+       
     }
 
     renderDarkModeButtonText = () => {
-        if(this.props.darkMode){
-            return 'Light Mode'
-        }else{
-            return 'Dark Mode'
+        try{
+            if(this.props.darkMode){
+                return 'Light Mode'
+            }else{
+                return 'Dark Mode'
+            }
+        }catch(err){
+            console.log(`components.TimerPlaybackControls.renderDarkModeButtonText: ${err}`);
         }
+       
     }
 
     render(){

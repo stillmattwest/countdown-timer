@@ -14,17 +14,22 @@ import "./App.css";
 class App extends Component{
 
     selectLightOrDark = () => {
-        if(this.props.darkMode){
-            return <Helmet>
-                <title>React Countdown Timer</title>
-                <link rel="stylesheet" href="darkly/bootstrap.min.css"></link>
-            </Helmet>
-        }else{
-            return <Helmet>
-                <title>React Countdown Timer</title>
-                <link rel="stylesheet" href="flatly/bootstrap.min.css"></link>
-            </Helmet>
+        try{
+            if(this.props.darkMode){
+                return <Helmet>
+                    <title>React Countdown Timer</title>
+                    <link rel="stylesheet" href="darkly/bootstrap.min.css"></link>
+                </Helmet>
+            }else{
+                return <Helmet>
+                    <title>React Countdown Timer</title>
+                    <link rel="stylesheet" href="flatly/bootstrap.min.css"></link>
+                </Helmet>
+            }
+        }catch(err){
+            console.log(`components.App.selectLightOrDark: ${err}`);
         }
+        
     }    
 
     render(){

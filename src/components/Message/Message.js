@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
-import { Container,Row,Col,Alert } from 'react-bootstrap';
+import { Container,Col,Alert } from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {setMessage} from '../../actions/messageActions';
 import './Message.css';
 
 class Message extends Component {

@@ -102,11 +102,16 @@ class TimerControls extends Component{
     }
 
     renderPlayPauseIcon = () => {
-        if(this.props.paused || this.props.paused === undefined){
-            return <span className="timer-controls-play-button"><BiPlay/></span>
-        }else{
-            return <span className="timer-controls-pause-button"><BiPause/></span>
+        try{
+            if(this.props.paused || this.props.paused === undefined){
+                return <span className="timer-controls-play-button"><BiPlay/></span>
+            }else{
+                return <span className="timer-controls-pause-button"><BiPause/></span>
+            }
+        }catch(err){
+            console.log(`components.TimerControls.renderPlayPauseIcon: ${err}`);
         }
+        
     }
 
     renderResetIcon = () => {
