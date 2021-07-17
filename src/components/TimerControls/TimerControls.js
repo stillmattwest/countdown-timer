@@ -26,6 +26,8 @@ class TimerControls extends Component{
                 let mins = context.props.timerMins;
                 let secs = context.props.timerSecs;
                 let paused = context.props.paused;
+                let oldMessage = context.props.message
+                let newMessage = ''; // used to store message values for the timer
                 // check to see if speed has changed
                 let newSpeed = context.props.timerSpeed;
                 let speedChanged = newSpeed !== timerSpeed;
@@ -43,7 +45,11 @@ class TimerControls extends Component{
                     secs --;
                     // check halfway done for odd initialTime minutes (ie 3, 5, etc)
                     if(initialTime % 2 !== 0 && mins < initialTime / 2 && secs < 30){
-                        context.props.setMessage('More than halfway there!');
+                        newMessage = 'More than halfway there!';
+                            if(oldMessage !== newMessage){
+                                context.props.setMessage(newMessage);
+                            }
+                        
                     }
                     context.props.setTimerSecs(secs);
                 }else{
@@ -52,7 +58,10 @@ class TimerControls extends Component{
                         mins --;
                         // check halfway done for even initialTime (ie 2,4 etc)
                         if(initialTime % 2 === 0 && mins < initialTime / 2){
-                            context.props.setMessage('More than halfway there!');
+                            newMessage = 'More than halfway there!';
+                            if(oldMessage !== newMessage){
+                                context.props.setMessage(newMessage);
+                            }
                         }
                         context.props.setTimerMins(mins);
                         context.props.setTimerSecs(secs);
@@ -134,7 +143,7 @@ class TimerControls extends Component{
 }
 
 const mapStateToProps = (state) => {
-    return{timer:state.timer,paused:state.paused,timerMins:state.timerMins,timerSecs:state.timerSecs,timerSpeed:state.timerSpeed,initialTime:state.initialTime}
+    return{timer:state.timer,paused:state.paused,timerMins:state.timerMins,timerSecs:state.timerSecs,timerSpeed:state.timerSpeed,initialTime:state.initialTime,message:state.message}
 }
 
 export default connect(mapStateToProps,{setTimerMins,setTimerSecs,setPause,setTimerRunning,setTimerSpeed,setMessage,setInitialTime})(TimerControls);
