@@ -15,7 +15,7 @@ import "./App.css";
 class App extends Component{
 
     selectLightOrDark = () => {
-        // sets css stylesheet based on props
+        // sets css stylesheet based on props. These override the import above
         try{
             if(this.props.darkMode){
                 return <Helmet>
