@@ -7,7 +7,8 @@ import TimerPlaybackControls from "../TimerPlaybackControls/TimerPlaybackControl
 import { Container,Row,Col} from "react-bootstrap";
 import {connect} from 'react-redux';
 import {Helmet} from 'react-helmet';
-import "bootswatch/dist/flatly/bootstrap.min.css"
+// importing the CSS here eliminates a weird display issue when the app first loads
+import "bootswatch/dist/flatly/bootstrap.min.css" 
 
 import "./App.css";
 
