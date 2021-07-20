@@ -42,7 +42,7 @@ class App extends Component{
                     <TimerSettings></TimerSettings>
                 </Row>
                 <Row>
-                    <Message></Message>
+                    <Message/>
                 </Row>
                 <Row>
                     <Col lg={{span:6,offset:3}}>

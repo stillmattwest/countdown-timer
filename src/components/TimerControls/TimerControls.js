@@ -68,6 +68,10 @@ class TimerControls extends Component{
                     }else{
                         context.props.setMessage("Time's up!");
                         clearInterval(runningTimer);
+                        context.props.setPause(true);
+                        context.props.setTimerRunning(false);
+                        context.props.setTimerMins(context.props.initialTime);
+                        
                     }
                 }
             }
@@ -84,6 +88,7 @@ class TimerControls extends Component{
             if(this.props.paused || this.props.paused === false){
                 if(this.props.paused){
                     this.props.setPause(false);
+                    this.props.setMessage('');
                     if(!this.props.timerRunning){
                         this.runTimer();
                     }
